@@ -72,6 +72,7 @@ route::post('/agregaestado',[Estado::class, 'agregar'])->name('estado.agregar');
 
 route::post('/registrobien',[Bienescontroller::class, 'agregarbien'])->name('Bienes.agregarbien');//listabien
 route::get('/listabien',[Bienescontroller::class, 'index'])->name('Bienes.listabien');
+route::get('/verbien/{id}',[Bienescontroller::class, 'verbien'])->name('Bienes.verbien');
 route::get('/editarbien/{id}',[Bienescontroller::class, 'editarbien'])->name('Bienes.editarbien');
 
 // codigo qr

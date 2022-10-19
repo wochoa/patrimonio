@@ -20,15 +20,17 @@ use App\Http\Controllers\InvokerController;
 
 Auth::routes();
 
-Route::get('storage/documentos_word/{file}', function ($file) {
+Route::get('storage/codigosqr/{file}', function ($file) {
 
-	$rutaDeArchivo = Storage::path('documentos_word/'.$file);
-	$headers = array(
-		'Content-Type: application/pdf',
-	  );
-	return response()->file($rutaDeArchivo,$headers);
+	$rutaDeArchivo = storage_path('codigosqr/'.$file);
+	// $headers = array(
+	// 	'Content-Type: application/pdf',
+	//   );
+	return response()->file($rutaDeArchivo);
     
 });
+
+http://patrimonio.test/storage/codigosqr/6.svg
 
 
 

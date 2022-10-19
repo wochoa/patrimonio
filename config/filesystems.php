@@ -41,6 +41,10 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'codigosqr' => [
+            'driver' => 'local',
+            'root' => storage_path('codigosqr'),
+        ],
 
         's3' => [
             'driver' => 's3',

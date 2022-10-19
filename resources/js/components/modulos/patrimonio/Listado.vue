@@ -107,7 +107,7 @@
 
                                             <td>{{bn.created_at}}</td>
                                             <td>
-                                                <button class="btn btn-warning btn-sm">
+                                                <button class="btn btn-warning btn-sm" @click.prevent="verqr(bn.idbien,bn.cod_pat)">
                                                     <i class="fa-solid fa-qrcode"></i></button>
                                                 <button class="btn btn-primary btn-sm">
                                                     <i class="fa-regular fa-pen-to-square"></i></button>
@@ -126,11 +126,46 @@
 
         </div>
     </div>
+
+    <!-- modal  -->
+    <!-- Modal -->
+    <div class="modal fade" id="mdqr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="vermodalqr" class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> -->
+                <div class="modal-body pt-1 pb-0">
+                    <table class="table table-bordered table-sm p-0">
+                        <tr>
+                            <td>
+                                <!-- <iframe :src="imagenbien" frameborder="0" width="120" height="120"></iframe> -->
+                                <img :src="imagenbien" alt="" width="120" height="120">
+                            </td>
+                            <td valign="top">
+                                <img :src="ruta+'/dist/img/logo2.png'" class="img-fluid" alt="">
+                                <p class="border-top">Bien registrado con:
+                                    <b>Cod.Patrimonial:</b> {{codp}}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer p-0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" @click.prevent="print">Imprimir</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+window.$ = window.jQuery = require('jquery')
 
 export default {
     name: '',
@@ -138,11 +173,12 @@ export default {
         return {
             databien: {},
             nombrecolor: '',
-            codigocolor: ''
-
+            codigocolor: '',
+            imagenbien: '',
+            codp: ''
         }
     },
-    props: [],
+    props: ['ruta'],
     components: {
 
     },
@@ -173,14 +209,70 @@ export default {
                 this.nombrecolor = '';
                 this.$refs.focusMe.focus();
             });
+        },
+        verqr(id, codp) {
+            //alert(id)
+            //var qr = document.querySelector('#configFirma')
+            // $('#mdqr').modal('show');
+            // $('#mdqr').modal('hide'); 
+            $('#mdqr').data('bs.modal', null);
+            $('#mdqr').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+
+            var url = this.ruta + '/api/qrcode/' + id
+            this.codp = codp
+            axios.get(url)
+                 .then(response=>{
+                    this.imagenbien=response.data
+                 })
+            //alert(url);
+        },
+        print() {
+            
+            const modal = document.getElementById("mdqr")
+            const cloned = modal.cloneNode(true)
+            let section = document.getElementById("print")
+
+            if (!section) {
+                section = document.createElement("div")
+                section.id = "print"
+                document.body.appendChild(section)
+            }
+
+            section.innerHTML = "";
+            section.appendChild(cloned);
+            window.print();
+
+            
         }
     }
 }
 </script>
 
-    
 <style lang="css" scoped>
 .digitacion {
     text-transform: uppercase;
+}
+
+@media screen {
+  #print {
+    display: none;
+   }
+}
+
+@media print {
+ body * {
+  visibility:hidden;
+  }
+  #print, #print * {
+    visibility:visible;
+  }
+  #print {
+    position:absolute;
+    left:0;
+    top:0;
+  }
 }
 </style>

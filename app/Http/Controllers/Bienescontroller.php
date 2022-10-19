@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class Bienescontroller extends Controller
@@ -11,6 +11,7 @@ class Bienescontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $bien=DB::table('bien')
@@ -102,9 +103,19 @@ class Bienescontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editarbien($id)
+    public function verbien($id)
     {
-        //
+        $bien=DB::table('bien')
+                                ->join('marca','bien.id_marca','=','marca.idmarca')
+                                ->join('modelo','bien.id_modelo','=','modelo.idmodelo')
+                                ->join('serie','bien.id_serie','=','serie.idserie')
+                                ->join('color','bien.id_color','=','color.idcolor')
+                                ->join('tipo','bien.id_tipo','=','tipo.idtipo')
+                                ->join('estado','bien.id_estado','=','estado.idestado')
+                                ->where('idbien',$id)
+                                ->get();
+        //return response()->json(['datbien'=>$bien], 200);
+        return view('detallesequipo',compact('bien','id'));
     }
 
     /**
@@ -115,8 +126,20 @@ class Bienescontroller extends Controller
      */
     public function qrcode($id)// id del bien
     {
-        $url=url('/editarbien/'.$id);
-        return \QrCode::size(100)->generate($url);
+        $url=url('/api/verbien/'.$id);
+        // $image = \QrCode::format('png')
+        //                  ->merge('dist/img/iFirma.png', 0.5, true)
+        //                  ->size(200)->errorCorrection('H')
+        //                  ->generate($url);
+        $image = \QrCode::size(100)
+        ->backgroundColor(255,55,0)
+        ->generate($url);
+
+
+        Storage::disk('codigosqr')->put($id.'.svg', $image);//guarda
+        
+        $url=url('storage/codigosqr/'.$id.'.svg');
+        return $url;
     }
 
     /**

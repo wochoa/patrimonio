@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <!-- Profile Image -->
-                    <div class="card card-primary card-outline " v-show="perfiluser" v-for="user in datousuario" >
+                    <div class="card card-primary card-outline " v-show="perfiluser" v-for="user in datousuario" v-if="user.id!=1">
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <img class="profile-user-img img-fluid img-circle" :src="ruta+'/dist/img/user1-128x128.jpg'" alt="User profile picture">

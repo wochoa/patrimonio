@@ -1,5 +1,8 @@
 @extends('layouts.loginp')
 
+@section('title')
+Login
+@endsection
 @section('content')
 
 

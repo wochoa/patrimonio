@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InvokerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +30,26 @@ Route::get('storage/codigosqr/{file}', function ($file) {
     
 });
 
-http://patrimonio.test/storage/codigosqr/6.svg
+Route::get('storage/firmados/{file}', function ($file) {
+
+	$rutaDeArchivo = storage_path('firmados/'.$file);
+	$headers = array(
+		'Content-Type: application/pdf',
+	  );
+	return response()->file($rutaDeArchivo);
+    
+});
+
+// http://patrimonio.test/storage/codigosqr/6.svg
+Route::get('storage/documentos_word/{file}', function ($file) {
+
+	$rutaDeArchivo = Storage::path('documentos_word/'.$file);
+	$headers = array(
+		'Content-Type: application/pdf',
+	  );
+	return response()->file($rutaDeArchivo,$headers);
+    
+});
 
 
 
@@ -38,3 +57,4 @@ http://patrimonio.test/storage/codigosqr/6.svg
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/{any?}', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->where('any','.*');
+

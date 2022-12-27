@@ -6,7 +6,7 @@
     <div class="content-wrapper">
 
         <transition name="slide-fade" mode="out-in">
-            <router-view :ruta="ruta" :usuario="usuario"> </router-view>
+            <router-view :ruta="ruta" :usuario="usuario" > </router-view>
         </transition>
 
     </div>
@@ -45,21 +45,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    /*
+/*
       Enter and leave animations can use different
       durations and timing functions.
     */
-    .slide-fade-enter-active {
-     transition: all .6s ease /* -out; */
-    }
-    
-    .slide-fade-leave-active {
-      transition: all .6s cubic-bezier(.17,.67,.83,.67)
-    }
-    
-    .slide-fade-enter,
-    .slide-fade-leave-to {
-      transform: translatey(350px);
-      opacity: 0;
-    }
+.slide-fade-enter-active {
+    transition: all .6s ease
+        /* -out; */
+}
+
+.slide-fade-leave-active {
+    transition: all .6s cubic-bezier(.17, .67, .83, .67)
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+    transform: translatey(350px);
+    opacity: 0;
+}
+
+
 </style>

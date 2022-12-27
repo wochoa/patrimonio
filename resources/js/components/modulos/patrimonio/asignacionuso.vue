@@ -91,6 +91,14 @@
                                         <i class="fa-sharp fa-solid fa-magnifying-glass"></i> Buscar</button>
                                 </div>
                                 <div class="col-md-2"><label for=""></label>
+                                    <button type="button" class="btn btn-block btn-primary btn-sm">
+                                        <i class="fa-solid fa-file-pdf"></i> Generar</button>
+                                </div>
+                                <div class="col-md-2"><label for=""></label>
+                                    <button type="button" class="btn btn-block btn-warning btn-sm" @click.stop="firmadigital({id:'123', id_documento:'456'})">
+                                        <i class="fa-solid fa-file-pdf"></i> Firmar</button>
+                                </div>
+                                <div class="col-md-2"><label for=""></label>
                                     <button type="button" class="btn btn-block btn-danger btn-sm">
                                         <i class="fa-solid fa-file-pdf"></i> Descargar</button>
                                 </div>
@@ -164,10 +172,17 @@
 
         </div>
     </div>
+    <docu-invoker ref="foo" :iframe="iframe" />
+    <!-- <docu-invoker ref="foo" :iframe="iframe" :route-invoker-get="routeInvokerGet" :route-invoker-post="routeInvokerPost" @firmado="firmado" /> -->
 </div>
 </template>
 
 <script>
+import VDragged from 'v-dragged'
+import DocuInvoker from './DocuInvoker'
+import Vue from 'vue'
+window.$ = window.jQuery = require('jquery')
+Vue.use(VDragged);
 export default {
     props: ['ruta'],
     data() {
@@ -175,11 +190,17 @@ export default {
             datousuario: {},
             dni: '',
             perfiluser: false,
-            listabien: false
+            listabien: false,
+            // DATOS PARA REFIRMA INVOKER
+            iframe: {
+                src: null,
+                loaded: false,
+                type: null
+            },
         }
     },
     components: {
-
+        DocuInvoker
     },
     created() {
 
@@ -200,7 +221,14 @@ export default {
         asignaciondeblenes(iduser) {
 
             this.listabien = true
-        }
+        },
+        firmadigital(documento) {
+
+            this.$refs.foo.initInvoker('W', documento)
+        },
+        firmado() {
+            //this.buscarDocumentos()
+        },
 
     }
 }

@@ -45,6 +45,10 @@ return [
             'driver' => 'local',
             'root' => storage_path('codigosqr'),
         ],
+        'firmados' => [
+            'driver' => 'local',
+            'root' => storage_path('firmados'),
+        ],
 
         's3' => [
             'driver' => 's3',

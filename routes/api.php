@@ -13,6 +13,7 @@ use App\Http\Controllers\Administrador\Listadobien;
 use App\Http\Controllers\Administrador\series;
 use App\Http\Controllers\Administrador\Colres;
 use App\Http\Controllers\Administrador\Estado;
+use App\Http\Controllers\InvokerController;
 
 use App\Http\Controllers\Bienescontroller;
 
@@ -77,4 +78,10 @@ route::get('/editarbien/{id}',[Bienescontroller::class, 'editarbien'])->name('Bi
 
 // codigo qr
 Route::get('/qrcode/{id}', [Bienescontroller::class, 'qrcode'])->name('Bienes.qrcode');
+
+Route::get('/invoker/postArguments',[InvokerController::class, 'postArguments'])->name('invoker.postArguments');
+Route::get('/invoker/upload',[InvokerController::class, 'upload'])->name('invoker.upload');
+Route::get('/invoker/getArguments',[InvokerController::class, 'getArguments'])->name('invoker.getArguments');
+// Route::get('invoker/getFile',[InvokerController::class, 'getFile'])->name('invoker.getFile');
+// Route::get('documento/printR/{idFile}/{idDocumento}',[InvokerController::class, 'printPdfR'])->name('invoker.printPdfRefirma');
    

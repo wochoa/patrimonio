@@ -58,7 +58,7 @@
                         <div class="col-sm-4">
                             <div class="form-group row">
                                 <label for="" class="col-sm-3">Tipo:</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-7">
                                     <select class="form-control form-control-sm" v-model="idcategoria" @change="listadodemarca">
 
                                         <template v-for="cat in datacategoria">
@@ -66,16 +66,22 @@
                                         </template>
                                     </select>
                                 </div>
+                                <div class="col-sm-1">
+                                    <button class="btn  btn-primary btn-xs"><i class="fas fa-plus"></i></button>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label for="" class="col-sm-3">Marca:</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-7">
                                     <select class="form-control form-control-sm" v-model="idmarca" @change="listadomodelo">
 
                                         <template v-for="mar in datamarca">
                                             <option :value="mar.idmarca">{{mar.des_marca}}</option>
                                         </template>
                                     </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn  btn-primary btn-xs"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -316,5 +322,11 @@ export default {
 <style lang="css" scoped>
 .digitacion {
     text-transform: uppercase;
+}
+.btn-xs{
+    padding: 0.125rem 0.25rem;
+    font-size: .75rem;
+    line-height: 1.5;
+    border-radius: 0.15rem;
 }
 </style>

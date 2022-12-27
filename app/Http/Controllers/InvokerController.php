@@ -30,10 +30,11 @@ class InvokerController extends Controller
             $documentName   .=  '-'.$request->iddocumento.'.pdf';
         }else
             $documentName = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 40).".PDF" ;
+            $rutaupload=env('APP_URL').'/upload.php';
 
         $param=[
                 'app'=>'pdf',
-                'fileUploadUrl'=>route('invoker.upload'),
+                'fileUploadUrl'=>env('APP_URL').'/upload.php',//'http://patrimonio.test/api/invoker/upload',//'http://invokerapi.test/controller/upload.php',//route('invoker.upload'),
                 'reason'=>$motivo[$request->motivo],
                 'clientId'=>env('CLIENTID'),
                 'clientSecret'=>env('CLIENTSECRET'),
@@ -66,7 +67,7 @@ class InvokerController extends Controller
             $param['contentFile']=$request->iddocumento.'.pdf';
 
             
-            $rutaDeArchivo = url('storage/documentos_word/1663465576-4295-INFORME-51-2022.pdf');
+            $rutaDeArchivo = url('storage/documentos_word/informe.pdf');
 	       
 
             $param['fileDownloadUrl']=$rutaDeArchivo;
@@ -85,43 +86,13 @@ class InvokerController extends Controller
 
     public function upload(Request $request)
     {
-        if ($request->hasFile('MyForm'))
-        {
-
-            //get filename with extension
-            $filenametostore = $request->file('MyForm')->getClientOriginalName();
-            // $str = explode('-', $filenametostore);
-            // $id=$str[0];
-            // $str = explode('.',$str[1]);
-            // $id_documento = reset($str);
-            // $file_select = File::where('id','=',$id)
-            //     ->where('id_documento','=',$id_documento)
-            //     ->first();
-            // $doc = Documento::find($id_documento);
-            // $doc->docu_firma_electronica=true;
-            // $doc->save();
-            //$nombre= time()."-".$eldocu->getClientOriginalName();
-            //Storage::disk()->putFileAs('documentos_word', $filenametostore, $filenametostore);
-            //Storage::disk()->putFileAs('documentos_word', $nomoriginal, $nombrenuevo);
-            
-            Storage::disk('documentos_word')->put($filenametostore, fopen($request->file('MyForm'), 'r+'));
+        // $filenametostore = $request->file('MyForm')->getClientOriginalName();
+        // Storage::disk('firmados')->put('21212-3354672.pdf', $filenametostore);
             //Store $filenametostore in the database
-
-            // $file=$request->file("MyForm");
-            
-            // $nombre = "pdf_".time().".".$file->guessExtension();
-
-            // $ruta = public_path("documentos_word/".$nombre);
-
-            // if($file->guessExtension()=="pdf"){
-            //     copy($file, $ruta);
-            // }else{
-            //     dd("NO ES UN PDF");
-            // }
-
             return 'correcto';
-        }
-    // return 'hola';
+
+
+
     }
 
     public function getArguments(Request $request)

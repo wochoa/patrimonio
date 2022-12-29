@@ -27,10 +27,10 @@ class formatospdf extends Controller
                                             ->where('user_end',$iduser)->get();
         //return response()->json(['datos'=>$resultados], 200);
         //return view('formato7');
-        $pdf = \PDF::loadView('formato7', compact('resultados','datouser'));
+        $pdf = \PDF::loadView('formato7', compact('resultados','datouser'))->setPaper('a4', 'landscape');
         //return $pdf->download($dni.'.pdf');
-        //return $datouser;
-        //return view('formato7',compact('datouser'));
+        //return $resultados;
+        // return view('formato7',compact('datouser'));
         return $pdf->stream();
         
     }

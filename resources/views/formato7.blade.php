@@ -27,6 +27,7 @@
     </head>
     <body>
         <h4 style="text-align: center">CARGO PERSONAL - GOBIERNO REGIONAL HUANUCO</h4>
+        <img src="{{asset('/dist/img/logo2.png')}}" alt="" width="130">
         <hr>
 
         <table style="font-size: 10px">
@@ -36,7 +37,7 @@
             </tr>
             <tr>
                 <td><strong>APELLIDOS Y NOMBRES</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_name}} {{$datouser[0]->adm_lastname}}</td>                
-                <td><strong>FECHA</strong></td><td class="bodecuadro">3227</td>                
+                <td><strong>FECHA</strong></td><td class="bodecuadro">{{date('Y/m/d')}}</td>                
             </tr>
             <tr>
                 <td><strong>DNI</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_dni}}</td>                
@@ -55,9 +56,51 @@
                 <td><strong></strong></td><td></td>                
             </tr>
         </table>
-
+        <br>
         <div class="contenido">
-            .............
+            <table  style="font-size: 10px" border="1" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>N° INT</th>
+                        <th>CÓD PATRIM</th>
+                        <th>NOMBRE</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>TIPO</th>
+                        <th>COLOR</th>
+                        <th>SERIE</th>
+                        <th>DIMENSION</th>
+                        <th>ESTADO</th>
+                        <th>CÓDIGO ANTERIOR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for ($i = 0; $i < count($resultados); $i++)
+                        <tr>
+                            <td>{{$i+1}}</td>
+                            <td>{{$resultados[$i]->cod_pat}}</td>
+                            <td>{{$resultados[$i]->nom_bien}}</td>
+                            <td>{{$resultados[$i]->des_marca}}</td>
+                            <td>{{$resultados[$i]->des_modelo}}</td>
+                            <td>{{$resultados[$i]->des_tipo}}</td>
+                            <td>{{$resultados[$i]->des_color}}</td>
+                            <td>{{$resultados[$i]->des_serie}}</td>
+                            <td>{{$resultados[$i]->dimension}}</td>
+                            <td>{{$resultados[$i]->des_estado}}</td>
+                            <td>{{$resultados[$i]->cod_anterior}}</td>
+                        </tr>
+                    @endfor
+                   
+                </tbody>
+            </table>
+            <br><br><br><br>
+            <table width='100%' style="margin-top: 50px" align="center" style="font-size: 10px">
+                <tr>
+                    <td width='33%' align="center">-------------------------------- <br>Usuario</td>
+                    <td width='33%'></td>
+                    <td width='33%' align="center">-------------------------------- <br>personal inventariador</td>
+                </tr>
+            </table>
         </div>
     </body>
 </html>

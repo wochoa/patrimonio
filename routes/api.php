@@ -75,6 +75,11 @@ route::post('/registrobien',[Bienescontroller::class, 'agregarbien'])->name('Bie
 route::get('/listabien',[Bienescontroller::class, 'index'])->name('Bienes.listabien');
 route::get('/verbien/{id}',[Bienescontroller::class, 'verbien'])->name('Bienes.verbien');
 route::get('/editarbien/{id}',[Bienescontroller::class, 'editarbien'])->name('Bienes.editarbien');
+route::get('/buscarbien/{id}',[Bienescontroller::class, 'buscarbien'])->name('Bienes.buscarbien');
+
+route::get('/listamotivo',[Bienescontroller::class, 'listamotivo'])->name('Bienes.listamotivo');
+route::post('/asignacionbien',[Bienescontroller::class, 'asignacionbien'])->name('Bienes.asignacionbien');
+route::get('/bienesasignados/{dni}',[Bienescontroller::class, 'bienesasignados'])->name('bienesasignados');
 
 // codigo qr
 Route::get('/qrcode/{id}', [Bienescontroller::class, 'qrcode'])->name('Bienes.qrcode');

@@ -15,7 +15,7 @@ class CreateMotivoMovimientoTable extends Migration
     {
         Schema::create('motivo_movimiento', function (Blueprint $table) {
             $table->increments('idmotmovimiento');
-            $table->text('motivo');//descriopcion del modelo
+            $table->text('motivo');//descriopcion del motivo
             $table->timestamps();
         });
     }

@@ -9,6 +9,13 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/en'
+// import App from './App.vue';
+
+Vue.use(ElementUI, { locale });
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

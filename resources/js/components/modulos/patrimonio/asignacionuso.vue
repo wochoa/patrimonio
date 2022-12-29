@@ -79,7 +79,7 @@
                         <div class="card-body">
                             <!-- para las opciones de busqueda -->
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="group">
                                         <label for="" class="text-sm">Código patrimonial</label>
                                         <input type="number" class="form-control form-control-sm" placeholder="Digite el código">
@@ -91,13 +91,17 @@
                                         <i class="fa-sharp fa-solid fa-magnifying-glass"></i> Buscar</button>
                                 </div>
                                 <div class="col-md-2"><label for=""></label>
+                                    <button type="button" class="btn btn-block btn-warning btn-sm" data-toggle="modal" data-target="#asignarbien">
+                                        <i class="fas fa-plus"></i> Asignar bien</button>
+                                </div>
+                                <div class="col-md-2"><label for=""></label>
                                     <button type="button" class="btn btn-block btn-primary btn-sm">
                                         <i class="fa-solid fa-file-pdf"></i> Generar</button>
                                 </div>
-                                <div class="col-md-2"><label for=""></label>
+                                <!-- <div class="col-md-2"><label for=""></label>
                                     <button type="button" class="btn btn-block btn-warning btn-sm" @click.stop="firmadigital({id:'123', id_documento:'456'})">
                                         <i class="fa-solid fa-file-pdf"></i> Firmar</button>
-                                </div>
+                                </div> -->
                                 <div class="col-md-2"><label for=""></label>
                                     <button type="button" class="btn btn-block btn-danger btn-sm">
                                         <i class="fa-solid fa-file-pdf"></i> Descargar</button>
@@ -122,36 +126,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr v-for="asig in bienesasignados">
                                             <td><small>
-                                                    <strong>COD.PATRIMONIAL</strong>192542354<br>
-                                                    <strong>COD.ANTERIOR</strong>192034521
+                                                    <strong>COD.PATRIMONIAL</strong>{{asig.cod_pat}}<br>
+                                                    <strong>COD.ANTERIOR</strong>{{asig.cod_anterior}}
                                                 </small>
                                             </td>
-                                            <td><small>COMPUTADORA DE ESCRITORIO</small></td>
+                                            <td><small>{{asig.nom_bien}}</small></td>
                                             <td><small>
-                                                    <strong>MARCA</strong>192542354<br>
-                                                    <strong>MODELO</strong>192034521<br>
-                                                    <strong>SERIE</strong>192034521<br>
-                                                    <strong>COLOR</strong>192034521<br>
-                                                    <strong>PLACA</strong>192034521
+                                                    <strong>MARCA</strong>{{asig.nom_bien}}<br>
+                                                    <strong>MODELO</strong>{{asig.des_modelo}}<br>
+                                                    <strong>SERIE</strong>{{asig.des_serie}}<br>
+                                                    <strong>COLOR</strong>{{asig.des_color}}<br>
+                                                    <strong>PLACA</strong>{{asig.placa}}
                                                 </small>
                                             </td>
                                             <td><small>
-                                                    <strong>TIPO</strong>192542354<br>
-                                                    <strong>DIMENCION</strong>192034521<br>
-                                                    <strong>ESTADO</strong>192034521
+                                                    <strong>TIPO</strong>{{asig.des_tipo}}<br>
+                                                    <strong>DIMENCION</strong>{{asig.dimension}}<br>
+                                                    <strong>ESTADO</strong> {{asig.des_estado}}
                                                 </small>
                                             </td>
 
                                             <td><small>
-                                                    <strong>DOC.COMPRA</strong>192542354<br>
-                                                    <strong>MONTO:</strong>192034521
+                                                    <strong>DOC.COMPRA</strong>{{asig.n_documento}}<br>
+                                                    <strong>MONTO:</strong>{{asig.monto_compra}}
                                                 </small>
                                             </td>
                                             <td>NINGUNA</td>
 
-                                            <td>03/08/2022</td>
+                                            <td>{{asig.fecha}}</td>
                                             <td>
                                                 <button class="btn btn-warning btn-sm">
                                                     <i class="fa-solid fa-qrcode"></i></button>
@@ -172,6 +176,68 @@
 
         </div>
     </div>
+
+    <!-- modal asignar Bien -->
+    <!-- Modal -->
+    <div class="modal fade" id="asignarbien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Asignación del bien</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-4">Código patrimonial</label>
+                        <div class="col-sm-8">
+                            <el-select v-model="idbien" filterable placeholder="Código patrimonial" size="small" class="" @change="buscabien($event)" style="width: 100%;">
+                                <el-option v-for="item in databien" :key="item.idbien" :label="item.cod_pat" :value="item.idbien">
+                                </el-option>
+                            </el-select>
+                        </div>
+
+                    </div>
+                    <div class="row form-group" v-show="activoresul">
+                        <table class="table table-bordered table-sm">
+                            <tr>
+                                <td>Codigo patrimonial</td>
+                                <td>{{ codpat }}</td>
+                            </tr>
+                            <tr>
+                                <td>Nombre del bien</td>
+                                <td>{{ nombien }}</td>
+                            </tr>
+                            <tr>
+                                <td>Marca</td>
+                                <td>{{ marca }}</td>
+                            </tr>
+                            <tr>
+                                <td>Modelo</td>
+                                <td>{{ modelo }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row form-group">
+                        <label for="" class="col-sm-4">Tipo movimiento</label>
+                        <div class="col-sm-8">
+                            <select name="" id="" class="form-control form-control-sm" v-model="idmotivo" placeholder="Tipo movimiento">
+                                <option v-for="tipm in datamotivo" :value="tipm.idmotmovimiento">{{ tipm.motivo }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" @click="guardaasignacion">Asignar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <docu-invoker ref="foo" :iframe="iframe" />
     <!-- <docu-invoker ref="foo" :iframe="iframe" :route-invoker-get="routeInvokerGet" :route-invoker-post="routeInvokerPost" @firmado="firmado" /> -->
 </div>
@@ -181,6 +247,8 @@
 import VDragged from 'v-dragged'
 import DocuInvoker from './DocuInvoker'
 import Vue from 'vue'
+import axios from 'axios';
+
 window.$ = window.jQuery = require('jquery')
 Vue.use(VDragged);
 export default {
@@ -197,6 +265,19 @@ export default {
                 loaded: false,
                 type: null
             },
+            databien: {},
+            idbien: '',
+            idmotivo: '',
+            //////
+            itembien: [],
+            codpat: '',
+            nombien: '',
+            marca: '',
+            modelo: '',
+            activoresul: false,
+            datamotivo: {},
+            bienesasignados: {}
+
         }
     },
     components: {
@@ -206,7 +287,8 @@ export default {
 
     },
     mounted() {
-
+        this.codigopatrimonial();
+        this.motivomovimiento();
     },
     methods: {
         buscarusuario() {
@@ -215,12 +297,71 @@ export default {
                 .then(response => {
                     console.log(response);
                     this.datousuario = response.data.datouser;
-                    this.perfiluser = true
+                    this.perfiluser = true;
+                    this.fun_bienesasignados();
                 });
         },
         asignaciondeblenes(iduser) {
 
             this.listabien = true
+        },
+        codigopatrimonial() {
+            var url = '/api/listabien';
+            axios.get(url).
+            then(response => {
+                console.log(response);
+                this.databien = response.data.datbien;
+            });
+        },
+        buscabien(item) {
+            item = this.idbien;
+            var url = '/api/buscarbien/' + this.idbien;
+            axios.get(url)
+                .then(response => {
+                    console.log(response);
+                    this.itembien = response.data.databien;
+                    this.codpat = this.itembien[0].cod_pat;
+                    this.nombien = this.itembien[0].nom_bien;
+                    this.marca = this.itembien[0].des_marca;
+                    this.modelo = this.itembien[0].des_modelo;
+                    this.activoresul = true;
+                });
+        },
+        motivomovimiento() {
+            var url = '/api/listamotivo';
+            axios.get(url)
+                .then(
+                    response => {
+                        console.log(response);
+                        this.datamotivo = response.data.movi;
+                    }
+                );
+        },
+        guardaasignacion() {
+            var url = '/api/asignacionbien';
+            if (this.idmotivo != '' && this.idbien != '') {
+                axios.post(url, {
+                        'dni': this.dni,
+                        'idbien': this.idbien,
+                        'idmotivo': this.idmotivo
+                    })
+                    .then(response => {
+                        console.log(response);
+                        $('#asignarbien').modal('hide')
+                        //this.datamotivo = response.data.movi;
+                    });
+            } else {
+                alert('Falta seleccionar algunos datos')
+            }
+
+        },
+        fun_bienesasignados() {
+            var url = '/api/bienesasignados/' + this.dni;
+            axios.get(url)
+                .then(response => {
+                    console.log(response);
+                    this.bienesasignados=response.data.datos;
+                });
         },
         firmadigital(documento) {
 
@@ -238,4 +379,12 @@ export default {
 .digitacion {
     text-transform: uppercase;
 }
+
+/* .el-input_inner{
+    height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+} */
 </style>

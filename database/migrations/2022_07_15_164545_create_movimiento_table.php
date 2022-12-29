@@ -19,14 +19,14 @@ class CreateMovimientoTable extends Migration
             $table->integer('id_motivo_movimiento');//monbre bien
             $table->integer('oficina_ini');//monbre bien
             $table->integer('oficina_end');//monbre bien
-            $table->integer('user_ini');//monbre bien
-            $table->integer('user_end');//monbre bien
-            $table->integer('numero_cargo_in');//monbre bien
-            $table->integer('numero_cargo_end');
-            $table->text('fecha_cargo_in');//monbre bien
-            $table->text('fecha_cargo_end');//monbre bien
-            $table->text('n_documento');//monbre bien
-            $table->text('fecha');//monbre bien
+            $table->integer('user_ini');//usuario inicial
+            $table->integer('user_end');//usuario final
+            $table->integer('numero_cargo_in');//numero de cargo inicial
+            $table->integer('numero_cargo_end');// numero cargo final
+            $table->text('fecha_cargo_in');//fecha cargo inicial
+            $table->text('fecha_cargo_end');//fecha cargo final
+            $table->text('n_documento');//numero documento
+            $table->text('fecha');//fecha registro
             $table->timestamps();
         });
     }

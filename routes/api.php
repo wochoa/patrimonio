@@ -17,6 +17,8 @@ use App\Http\Controllers\InvokerController;
 
 use App\Http\Controllers\Bienescontroller;
 
+use App\Http\Controllers\formatospdf;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -80,6 +82,9 @@ route::get('/buscarbien/{id}',[Bienescontroller::class, 'buscarbien'])->name('Bi
 route::get('/listamotivo',[Bienescontroller::class, 'listamotivo'])->name('Bienes.listamotivo');
 route::post('/asignacionbien',[Bienescontroller::class, 'asignacionbien'])->name('Bienes.asignacionbien');
 route::get('/bienesasignados/{dni}',[Bienescontroller::class, 'bienesasignados'])->name('bienesasignados');
+
+// generar CARGO PERSONAL F7
+route::get('/cargopersonal/{dni}',[formatospdf::class, 'cargopersonal'])->name('cargopersonal');
 
 // codigo qr
 Route::get('/qrcode/{id}', [Bienescontroller::class, 'qrcode'])->name('Bienes.qrcode');

@@ -95,8 +95,8 @@
                                         <i class="fas fa-plus"></i> Asignar bien</button>
                                 </div>
                                 <div class="col-md-2"><label for=""></label>
-                                    <button type="button" class="btn btn-block btn-primary btn-sm">
-                                        <i class="fa-solid fa-file-pdf"></i> Generar</button>
+                                    <a class="btn btn-block btn-primary btn-sm" :href="'/api/cargopersonal/'+dni" target="_blank">
+                                        <i class="fa-solid fa-file-pdf"></i> Generar cargo personal</a>
                                 </div>
                                 <!-- <div class="col-md-2"><label for=""></label>
                                     <button type="button" class="btn btn-block btn-warning btn-sm" @click.stop="firmadigital({id:'123', id_documento:'456'})">

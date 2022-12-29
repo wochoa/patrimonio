@@ -106,6 +106,10 @@
                                     <a class="btn btn-block btn-info btn-sm" :href="'/api/devolucionbines/'+dni" target="_blank">
                                        Devolucion de bienes</a>
                                 </div>
+                                <div class="col-md-2"><label for=""></label>
+                                    <a class="btn btn-block btn-danger btn-sm" :href="'/api/movimientobienes/'+dni" target="_blank">
+                                       Salida de bienes</a>
+                                </div>
                             </div>
 
                             <div class="row mt-2">
@@ -121,6 +125,7 @@
                                             <th style="width: 10%;"><small><strong>DOCUMENTO</strong></small></th>
                                             <th style="width: 10%;"><small><strong>OBS</strong></small></th>
                                             <th style="width: 10%;"><small><strong>FECHA</strong></small></th>
+                                            <th style="width: 10%;"><small><strong>DESP</strong></small></th>
                                             <th></th>
 
                                         </tr>
@@ -156,6 +161,9 @@
                                             <td>NINGUNA</td>
 
                                             <td>{{asig.fecha}}</td>
+                                            <td>
+                                                <input type="checkbox">
+                                            </td>
                                             <td>
                                                 <button class="btn btn-warning btn-sm">
                                                     <i class="fa-solid fa-qrcode"></i></button>

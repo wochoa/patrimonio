@@ -86,6 +86,7 @@ route::get('/bienesasignados/{dni}',[Bienescontroller::class, 'bienesasignados']
 // generar CARGO PERSONAL F7
 route::get('/cargopersonal/{dni}',[formatospdf::class, 'cargopersonal'])->name('cargopersonal');
 route::get('/devolucionbines/{dni}',[formatospdf::class, 'devolucionbines'])->name('devolucionbines');
+route::get('/movimientobienes/{dni}',[formatospdf::class, 'movimientobienes'])->name('movimientobienes');
 
 // codigo qr
 Route::get('/qrcode/{id}', [Bienescontroller::class, 'qrcode'])->name('Bienes.qrcode');

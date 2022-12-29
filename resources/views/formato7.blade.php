@@ -26,39 +26,47 @@
     </style>
     </head>
     <body>
+        <h4 style="text-align: center">ANEXO N° 07</h4>
+        <h4 style="text-align: center">FORMATO DE FICHA DE LEVENATMIENTO DE INFORMACION INVENTARIO PATRIMNIAL</h4>
         <h4 style="text-align: center">CARGO PERSONAL - GOBIERNO REGIONAL HUANUCO</h4>
         <img src="{{asset('/dist/img/logo2.png')}}" alt="" width="130">
         <hr>
 
-        <table style="font-size: 10px">
+        <table style="font-size: 10px" width="100%">
             <tr>
-                <td><strong>OFICINA</strong>:</td><td class="bodecuadro">{{$datouser[0]->depe_nombre}}</td>                
+                <td><strong>OFICINA</strong>:</td><td class="bodecuadro">{{$datouser[0]->depe_nombre}}</td> 
+                <td width="15%"></td>               
                 <td><strong>NUMERO</strong></td><td class="bodecuadro">....</td>                
             </tr>
             <tr>
-                <td><strong>APELLIDOS Y NOMBRES</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_name}} {{$datouser[0]->adm_lastname}}</td>                
+                <td><strong>APELLIDOS Y NOMBRES</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_name}} {{$datouser[0]->adm_lastname}}</td>
+                <td width="15%"></td>                 
                 <td><strong>FECHA</strong></td><td class="bodecuadro">{{date('Y/m/d')}}</td>                
             </tr>
             <tr>
-                <td><strong>DNI</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_dni}}</td>                
+                <td><strong>DNI</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_dni}}</td>
+                <td width="15%"></td>                 
                 <td><strong></strong></td><td ></td>                
             </tr>
             <tr>
-                <td><strong>CARGO Y NIVEL</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_cargo}}</td>                
+                <td><strong>CARGO Y NIVEL</strong>:</td><td class="bodecuadro">{{$datouser[0]->adm_cargo}}</td>
+                <td width="15%"></td>                 
                 <td><strong></strong></td><td></td>                
             </tr>
             <tr>
-                <td><strong>CONDICION LABORAL</strong>:</td><td class="bodecuadro">CAS</td>                
+                <td><strong>CONDICION LABORAL</strong>:</td><td class="bodecuadro">CAS</td>
+                <td width="15%"></td>                 
                 <td><strong>CANTIDAD BIENES</strong></td><td class="bodecuadro"></td>                
             </tr>
             <tr>
-                <td><strong>OBSERVACIONES</strong>:</td><td class="bodecuadro"></td>                
+                <td><strong>OBSERVACIONES</strong>:</td><td class="bodecuadro"></td>
+                <td width="15%"></td>                 
                 <td><strong></strong></td><td></td>                
             </tr>
         </table>
         <br>
         <div class="contenido">
-            <table  style="font-size: 10px" border="1" cellspacing="0" cellpadding="0">
+            <table  style="font-size: 10px" border="1" cellspacing="0" cellpadding="0" width="100%">
                 <thead>
                     <tr>
                         <th>N° INT</th>
@@ -98,7 +106,7 @@
                 <tr>
                     <td width='33%' align="center">-------------------------------- <br>Usuario</td>
                     <td width='33%'></td>
-                    <td width='33%' align="center">-------------------------------- <br>personal inventariador</td>
+                    <td width='33%' align="center">-------------------------------- <br>Personal inventariador</td>
                 </tr>
             </table>
         </div>

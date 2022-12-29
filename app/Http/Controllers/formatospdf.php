@@ -40,9 +40,26 @@ class formatospdf extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function devolucionbines($dni)
     {
-        //
+        $iduser=DB::table('admin')->where(['adm_dni'=>$dni,'adm_estado'=>1])->orderBy('id','DESC')->limit(1)->value('id');
+        $datouser=DB::table('admin')->join('dependencia','admin.depe_id','=','dependencia.iddependencia')->where(['adm_dni'=>$dni,'adm_estado'=>1])->orderBy('id','DESC')->limit(1)->get();
+
+        $resultados=DB::table('movimiento')->join('bien','movimiento.id_bien','=','bien.idbien')
+                                            ->join('marca','bien.id_marca','=','marca.idmarca')
+                                            ->join('modelo','bien.id_modelo','=','modelo.idmodelo')
+                                            ->join('serie','bien.id_serie','=','serie.idserie')
+                                            ->join('color','bien.id_color','=','color.idcolor')
+                                            ->join('tipo','bien.id_tipo','=','tipo.idtipo')
+                                            ->join('estado','bien.id_estado','=','estado.idestado')
+                                            ->where('user_end',$iduser)->get();
+        //return response()->json(['datos'=>$resultados], 200);
+        //return view('formato7');
+        $pdf = \PDF::loadView('formato3', compact('resultados','datouser'))->setPaper('a4', 'landscape');
+        //return $pdf->download($dni.'.pdf');
+        //return $resultados;
+        // return view('formato7',compact('datouser'));
+        return $pdf->stream();
     }
 
     /**

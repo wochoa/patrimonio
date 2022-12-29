@@ -103,8 +103,8 @@
                                         <i class="fa-solid fa-file-pdf"></i> Firmar</button>
                                 </div> -->
                                 <div class="col-md-2"><label for=""></label>
-                                    <button type="button" class="btn btn-block btn-danger btn-sm">
-                                        <i class="fa-solid fa-file-pdf"></i> Descargar</button>
+                                    <a class="btn btn-block btn-info btn-sm" :href="'/api/devolucionbines/'+dni" target="_blank">
+                                       Devolucion de bienes</a>
                                 </div>
                             </div>
 
@@ -347,7 +347,8 @@ export default {
                     })
                     .then(response => {
                         console.log(response);
-                        $('#asignarbien').modal('hide')
+                        $('#asignarbien').modal('hide');
+                        this. fun_bienesasignados();
                         //this.datamotivo = response.data.movi;
                     });
             } else {
